@@ -14,7 +14,7 @@ jupyter:
 ---
 
 # Name(s)
-**PUT YOUR FULL NAME(S) HERE**
+by Justis Mackaoui
 
 
 **Instructions:** This is an individual assignment, but you may discuss your code with your neighbors.
@@ -46,46 +46,83 @@ For the following exercises please read the Python appendix in the Marsland text
 ## Exercise 1
 
 ```python
-# YOUR SOLUTION HERE
-#a=1000
-print('this is my answer',a+1) 
+import numpy as np
+
+a = np.full(shape = (6,4), fill_value = 2)
+a
 ```
 
 ## Exercise 2
 
 ```python
-# YOUR SOLUTION HERE
-a=2000
+b = np.ones(shape = (6,4), dtype = int)
+np.fill_diagonal(b, val = 3)
+b
 ```
 
 ## Exercise 3
 
 ```python
-# YOUR SOLUTION HERE
+ab = a*b
+ab
 ```
 
 ## Exercise 4
 
 ```python
-# YOUR SOLUTION HERE
+aTb = np.dot(a.transpose(), b)
+print(aTb)
+
+abT = np.dot(a, b.transpose())
+print('\n' + str(abT))
 ```
 
 ## Exercise 5
 
 ```python
-# YOUR SOLUTION HERE
+def print_something():
+    print('something')
+
+print_something()
 ```
 
 ## Exercise 6
 
 ```python
-# YOUR SOLUTION HERE
+def random_array():
+    nrows = np.random.randint(low = 1, high = 10,dtype = int)
+    ncols = np.random.randint(low = 1, high = 10,dtype = int)
+    arr = np.random.rand(nrows, ncols)
+    print(arr)
+    print('\nsum: %f' % arr.sum())
+    print('mean: %f' % arr.mean())
+    print('stdev: %f' % arr.std())
+
+random_array()
 ```
 
 ## Exercise 7
 
 ```python
-# YOUR SOLUTION HERE
+sample_array = np.array([[0,2,1], [1,1,1], [2,4,5]])
+```
+
+```python
+def count_ones(array):
+    count = 0
+    for elem in np.nditer(array):
+        if elem == 1:
+            count += 1
+    return count
+
+count_ones(sample_array)
+```
+
+```python
+def count_ones_where(array):
+    return np.count_nonzero(np.where(array == 1, True, False))
+
+count_ones_where(sample_array)
 ```
 
 ## Excercises 8-???
@@ -96,28 +133,36 @@ While the Marsland book avoids using another popular package called Pandas, we w
 Repeat exercise A.1 from Marsland, but create a Pandas DataFrame instead of a NumPy array.
 
 ```python
-# YOUR SOLUTION HERE
+import pandas as pd
+
+a = pd.DataFrame(np.full(shape = (6,4), fill_value = 2))
+a
 ```
 
 ## Exercise 9
 Repeat exercise A.2 using a DataFrame instead.
 
 ```python
-# YOUR SOLUTION HERE
+b = np.ones(shape = (6,4), dtype = int)
+np.fill_diagonal(b, val = 3)
+a = pd.DataFrame(b)
+a
 ```
 
 ## Exercise 10
 Repeat exercise A.3 using DataFrames instead.
 
 ```python
-# YOUR SOLUTION HERE
+a*b
 ```
 
 ## Exercise 11
 Repeat exercise A.7 using a dataframe.
 
 ```python
-# YOUR SOLUTION HERE
+sample_array = np.array([[0,2,1], [1,1,1], [2,4,5]])
+df = pd.DataFrame(sample_array)
+sum(df[df == 1].sum())
 ```
 
 ## Exercises 12-14
@@ -137,24 +182,24 @@ Notice how we have nice headers and mixed datatypes? That is one of the reasons 
 How do you select the ``name`` column without using .iloc?
 
 ```python
-## YOUR SOLUTION HERE
+titanic_df.name
 ```
 
 ## Exercise 13
 After setting the index to ``sex``, how do you select all passengers that are ``female``? And how many female passengers are there?
 
 ```python
-## YOUR SOLUTION HERE
 titanic_df.set_index('sex',inplace=True)
+```
+
+```python
+titanic_df[titanic_df.index == 'female']
 ```
 
 ## Exercise 14
 How do you reset the index?
 
 ```python
-## YOUR SOLUTION HERE
-```
-
-```python
-
+titanic_df.reset_index(inplace = True)
+titanic_df.head()
 ```
